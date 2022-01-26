@@ -4,6 +4,7 @@
 #include <optional>
 #include <string>
 #include <cstdlib>
+#include <cmath>
 
 class Tokeniser
 {
