@@ -10,12 +10,14 @@ class Tokeniser
 {
 public:
 
+    const double PI =  3.141;
+    
     enum class Type
     {
         add,
         subtract,
         multiply,
-        
+
         unknown,
     };
     
@@ -56,19 +58,29 @@ private:
     
     std::optional <double> findAndExtractLHS (std::string input, std::string character) const
     {
-        if (auto pos = input.find (character); pos != std::string::npos)
-            return std::stod (input.substr (0, pos));
-            
-        return {};
+
+        std::string inputf;
+        if (auto pos = input.find (character); pos != std::string::npos) 
+            inputf = (input.substr (0, pos));
+       
+            if  (find (inputf, "pi"))
+                return PI;
+            else
+                return std::stod (inputf);
+        
+        
+        
+    return {};
     }
     
-    std::optional <double> findAndExtractRHS (std::string input, std::string character) const
-    {
-        if (auto pos = input.find (character); pos != std::string::npos)
-            return std::stod (input.substr (pos + 1));
-            
-        return {};
-    }
+    
+ std::optional <double> findAndExtractRHS (std::string input, std::string character) const
+ {
+     if (auto pos = input.find (character); pos != std::string::npos)
+         return std::stod (input.substr (pos + 1));
+         
+     return {};
+ }
 
     Type findType (std::string input) const
     {
@@ -81,6 +93,7 @@ private:
     
     std::optional <double> findLHS (std::string input) const
     {
+
         if (auto result = findAndExtractLHS (input, "+"))
             return result;
             
@@ -89,6 +102,7 @@ private:
             
         if (auto result = findAndExtractLHS (input, "*"))
             return result;
+        
             
         return {};
     }
@@ -118,6 +132,7 @@ public:
     double calculate (Tokeniser::TokenList tokens) const
     {
         switch (tokens.type)
+
         {
             case Tokeniser::Type::add:
                 return tokens.lhs + tokens.rhs;
