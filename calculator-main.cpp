@@ -60,17 +60,16 @@ private:
     std::optional <double> findAndExtractLHS (std::string input, std::string character) const
     {
 
-        std::string inputf;
+        std::string inputL;
         if (auto pos = input.find (character); pos != std::string::npos) {
-            inputf = (input.substr (0, pos));
+            inputL = input.substr (0, pos);
             
             //Search input for "pi", if contained return constant, PI
-            if  (find (inputf, "pi"))
+            if  (find (inputL, "pi"))
                 return PI;
             else
             //If not covert input to double and return
-                return std::stod (inputf);
-        
+                return std::stod (inputL);
         }
         
     return {};
@@ -79,9 +78,17 @@ private:
     
  std::optional <double> findAndExtractRHS (std::string input, std::string character) const
  {
-     if (auto pos = input.find (character); pos != std::string::npos)
-         return std::stod (input.substr (pos + 1));
-         
+    std::string inputR;
+     if (auto pos = input.find (character); pos != std::string::npos) {
+         inputR = input.substr (pos + 1);
+     
+         //Search input for "pi", if contained return constant, PI
+         if  (find (inputR, "pi"))
+             return PI;
+         else
+         //If not covert input to double and return
+             return std::stod (inputR);
+     }
      return {};
  }
 
