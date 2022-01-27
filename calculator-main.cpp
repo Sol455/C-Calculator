@@ -60,7 +60,7 @@ private:
     {
 
         std::string inputf;
-        if (auto pos = input.find (character); pos != std::string::npos) 
+        if (auto pos = input.find (character); pos != std::string::npos) {
             inputf = (input.substr (0, pos));
        
             if  (find (inputf, "pi"))
@@ -68,7 +68,7 @@ private:
             else
                 return std::stod (inputf);
         
-        
+        }
         
     return {};
     }
