@@ -10,7 +10,8 @@ class Tokeniser
 {
 public:
 
-    const double PI =  3.141;
+    //Define constant, PI
+    const double PI =  3.14159;
     
     enum class Type
     {
@@ -62,10 +63,12 @@ private:
         std::string inputf;
         if (auto pos = input.find (character); pos != std::string::npos) {
             inputf = (input.substr (0, pos));
-       
+            
+            //Search input for "pi", if contained return constant, PI
             if  (find (inputf, "pi"))
                 return PI;
             else
+            //If not covert input to double and return
                 return std::stod (inputf);
         
         }
