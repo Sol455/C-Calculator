@@ -212,6 +212,7 @@ public:
 
     static void check (double value, double expected, double range = 1e-3)
     {
+        std::cout << "Value: " << value << " Expected: " << expected << " Modulus: " << (value - expected) <<  "\n";
         return assert (std::abs (value - expected) <= range);
     }
 };
@@ -239,6 +240,17 @@ void test ()
     ResultChecker::check (Calculator ().calculate ({ 10, 4, Tokeniser::Type::multiply }), 40);
     ResultChecker::check (Calculator ().calculate ({ 25.3, 18.6, Tokeniser::Type::add }), 43.9);
     ResultChecker::check (Calculator ().calculate ({ 3, 5.6, Tokeniser::Type::subtract }), -2.6);
+    ResultChecker::check (Calculator ().calculate ({ 10, 4, Tokeniser::Type::multiply }), 40);
+    
+    //Tests for use of constant, PI
+    result = Tokeniser ().tokenise ("pi * 5");
+    assert (result.has_value ());
+    ResultChecker::check (result->lhs, 3.14159);
+    ResultChecker::check (result->rhs, 5);
+    assert (result->type == Tokeniser::Type::multiply);
+    
+    ResultChecker::check (Calculator ().calculate ({ 3.14159, 5, Tokeniser::Type::multiply }), 15.70795);
+    
 }
 
 void run ()
