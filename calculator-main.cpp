@@ -245,7 +245,7 @@ void test ()
     //Tests for use of constant, PI
     result = Tokeniser ().tokenise ("pi * 5");
     assert (result.has_value ());
-    ResultChecker::check (result->lhs, 3.14159);
+    ResultChecker::check (result->lhs, 3.141593);
     ResultChecker::check (result->rhs, 5);
     assert (result->type == Tokeniser::Type::multiply);
     
